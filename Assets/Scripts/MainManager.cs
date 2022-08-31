@@ -20,6 +20,7 @@ public class MainManager : MonoBehaviour
     private bool m_GameOver = false;
 
     public string nameP;
+    public int highScoreP;
     public int Highscore;
 
     // Start is called before the first frame update
@@ -43,6 +44,8 @@ public class MainManager : MonoBehaviour
         if(SecondaryManager.Instance != null)
         {
             nameP = SecondaryManager.Instance.pName;
+
+            highScoreP = SecondaryManager.Instance.highScore;
         }
     }
 
@@ -69,7 +72,10 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
 
-            SecondaryManager.Instance.highScore = Highscore;
+            if (Highscore > highScoreP)
+            {
+                SecondaryManager.Instance.highScore = Highscore;
+            }
         }
     }
 
@@ -88,6 +94,6 @@ public class MainManager : MonoBehaviour
 
     public void HighScore()
     {
-        NameandHighscoreText.text = "Highscore : " + nameP + " : ";
+        NameandHighscoreText.text = "Highscore : " + nameP + " : " + highScoreP;
     }
 }
